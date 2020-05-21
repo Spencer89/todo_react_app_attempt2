@@ -1,0 +1,31 @@
+body{
+  background-image: radial-gradient( circle farthest-corner at -3.1% -4.3%,  rgb(89, 247, 191) 0%, rgba(21,38,82,1) 90% );
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+}
+
+h1{
+  text-align: center;
+  color: whitesmoke;
+  font-family: helvetica;
+  font-weight: bolder;
+  font-size: 50px;
+}
+
+h3{
+  background-color: rgba(21,38,82,1)50%;
+  border-radius:15px;
+  height:50px;
+  width:100%;
+  margin: 20px;
+  color: whitesmoke;
+  font-size: 20px;
+  text-align: center;
+
+}
+
+p{
+  text-align: center;
+}

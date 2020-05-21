@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Sriracha&display=swap');
+
+.post-it{
+    background-color: rgb(225, 243, 65);
+    width: 220px;
+    height:200px;
+    font-size:100%;
+    font-weight:normal;
+    color: rgb(24, 24, 24);
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px black;
+    font-family: 'Sriracha';
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .post-it:hover{
+    transform: scale(1.2);
+  }
+  
+  .done-button{
+    background-color: rgb(98, 201, 128);
+    margin: 10px;
+  }
+  
+  .done-button:hover{
+    background-color: green;
+  }
+  
+  .delete-button{
+    background-color: rgb(209, 81, 49); 
+    margin: 10px;
+  }
+  
+  .delete-button:hover{
+    background-color: red;
+  }
+  
