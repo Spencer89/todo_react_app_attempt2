@@ -1,25 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PostIt from "./PostIt/PostIt"
+import AddAPostIt from './AddAPostIt/AddAPostIt';
 
 function App() {
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>Get Stuff Done.</h1>
+        <div className="form">
+        <AddAPostIt />
+        </div>
+        <h3>You have 5 outstanding post-its</h3>
+        <div className="container">
+          <div className="row">
+
+            <PostIt text="Mow the grass"/>
+            <PostIt text="Visit Allan and Jo"/>
+            <PostIt text="Mop the floor"/>
+            <PostIt text="Make carrot and corriander soup" />
+           <PostIt text="Do the ironing"/>
+          </div>
+        </div>
+        <h3>You have 2 completed post-its</h3>
+        <div className="container">
+          <div className="row">
+
+            <PostIt text="Clean the bathroom" />
+            <PostIt text="Make this week's quiz" />
+          </div>
+        </div>
     </div>
+
   );
 }
 
