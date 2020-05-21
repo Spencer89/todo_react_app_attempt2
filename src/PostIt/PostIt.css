@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Sriracha&display=swap');
 
 .post-it{
-    background-color: rgb(225, 243, 65);
+    
     width: 220px;
     height:200px;
     font-size:100%;
@@ -13,6 +13,16 @@
     padding: 20px;
     margin-top: 20px;
   }
+
+  .post-it__remaining{
+    background-color: rgb(225, 243, 65);}
+
+  .post-it__completed{
+    background-color: rgb(204, 204, 202);
+    text-decoration: line-through;
+  }
+
+
   
   .post-it:hover{
     transform: scale(1.2);
