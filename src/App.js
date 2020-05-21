@@ -1,56 +1,99 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import PostIt from "./PostIt/PostIt"
 import AddAPostIt from './AddAPostIt/AddAPostIt';
 import RemainingPostItCount from './RemainingPostItCount/RemainingPostItCount';
 import OutstandingPostItCount from './OutstandingPostItCount/OutstandingPostItCount';
+import { v4 as uuidv4 } from 'uuid';
+
 
 function App() {
   const [tasks, setTasks] = useState([
-    { text:"Clean the kitchen surfaces", completed: true, id: "001" },
-    { text:"Sort out Dads' Fathers' Day present", completed: false, id: "002" },
-    { text:"Email manager re: student election outcome", completed: false, id: "003" },
-    { text:"Complete ILM qualification", completed: false, id: "004" },
-    { text:"Mow the back garden", completed: true, id: "005" },
-    { text:"Batch cook carrot and lentil soup", completed: false, id: "006"  },
-    { text:"Visit Al & Jo (from a safe distance!)", completed: false, id: "007"}
+    { text: "Clean the kitchen surfaces", completed: true, id: uuidv4() },
+    { text: "Sort out Dads' Fathers' Day present", completed: false, id: uuidv4() },
+    { text: "Email manager re: student election outcome", completed: false, id: uuidv4() },
+    { text: "Complete ILM qualification", completed: false, id: uuidv4() },
+    { text: "Mow the back garden", completed: true, id: uuidv4() },
+    { text: "Batch cook carrot and lentil soup", completed: false, id: uuidv4() },
+    { text: "Visit Al & Jo (from a safe distance!)", completed: false, id: uuidv4() }
   ]);
 
-  const activeTasks= tasks.filter(task => !task.completed);
-  const completedTasks =  tasks.filter(task => task.completed);
+  const activeTasks = tasks.filter(task => !task.completed);
+  const completedTasks = tasks.filter(task => task.completed);
+
+  function deleteTask(id) {
+
+    const updatedTasks = tasks.filter(task => task.id !== id)
+    setTasks(updatedTasks);
+  }
+
+  function completeTask(id) {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        task.completed = true;
+      }
+      return task
+    })
+    setTasks(updatedTasks);
+  }
+
+
+  function addTask(text) { 
+
+  const newTask = {
+    text: text,
+    completed: false,
+    id: uuidv4()
+  }
+
+  const updatedTasks = [...tasks, newTask]
+  setTasks(updatedTasks);
+}
 
   return (
-    
+
     <div className="App">
-        <h1>Get Stuff Done.</h1>
-        <div className="form">
-        <AddAPostIt />
-        </div>
-        <div className="remaining-post-it-count">
-          <RemainingPostItCount count={activeTasks.length}/>
-        </div>
+      <h1>Get Stuff Done.</h1>
+      <div className="form">
+        <AddAPostIt addTask={addTask} />
+      </div>
+      <div className="remaining-post-it-count">
+        <RemainingPostItCount count={activeTasks.length} />
+      </div>
 
 
-        <div className="container">
-          <div className="row">
-            {activeTasks.map(task=> <PostIt  key={task.text} text = {task.text} completed = {task.completed}/>)}
-           
-            
+      <div className="container">
+        <div className="row">
+          {activeTasks.map(task => <PostIt
+            completeTask={completeTask}
+            deleteTask={deleteTask}
+            id={task.id}
+            key={task.id}
+            text={task.text}
+            completed={task.completed} />)}
 
 
-             
-           
-          </div>
+
+
+
+
         </div>
-        <div className="tasks outstanding-post-it-count">
-          <OutstandingPostItCount count= {completedTasks.length}/>
+      </div>
+      <div className="tasks outstanding-post-it-count">
+        <OutstandingPostItCount count={completedTasks.length} />
+      </div>
+      <div className="container">
+        <div className="row">
+          {completedTasks.map(task => <PostIt
+            completeTask={completeTask}
+            deleteTask={deleteTask}
+            id={task.id}
+            key={task.id}
+            text={task.text}
+            completed={task.completed} />)}
+
         </div>
-        <div className="container">
-          <div className="row">
-          {completedTasks.map(task=> <PostIt key={task.text} text = {task.text} completed = {task.completed}/>)}
-        
-          </div>
-        </div>
+      </div>
     </div>
 
   );
