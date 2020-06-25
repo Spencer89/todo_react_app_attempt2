@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 import PostIt from "./PostIt/PostIt"
 import AddAPostIt from './AddAPostIt/AddAPostIt';
 import RemainingPostItCount from './RemainingPostItCount/RemainingPostItCount';
 import OutstandingPostItCount from './OutstandingPostItCount/OutstandingPostItCount';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 
 function App() {
   const [tasks, setTasks] = useState([
-    { text: "Clean the kitchen surfaces", completed: true, id: uuidv4() },
-    { text: "Sort out Dads' Fathers' Day present", completed: false, id: uuidv4() },
-    { text: "Email manager re: student election outcome", completed: false, id: uuidv4() },
-    { text: "Complete ILM qualification", completed: false, id: uuidv4() },
-    { text: "Mow the back garden", completed: true, id: uuidv4() },
-    { text: "Batch cook carrot and lentil soup", completed: false, id: uuidv4() },
-    { text: "Visit Al & Jo (from a safe distance!)", completed: false, id: uuidv4() }
+    // { text: "Clean the kitchen surfaces", completed: true, id: uuidv4() },
+    // { text: "Sort out Dads' Fathers' Day present", completed: false, id: uuidv4() },
+    // { text: "Email manager re: student election outcome", completed: false, id: uuidv4() },
+    // { text: "Complete ILM qualification", completed: false, id: uuidv4() },
+    // { text: "Mow the back garden", completed: true, id: uuidv4() },
+    // { text: "Batch cook carrot and lentil soup", completed: false, id: uuidv4() },
+    // { text: "Visit Al & Jo (from a safe distance!)", completed: false, id: uuidv4() }
   ]);
 
-  const activeTasks = tasks.filter(task => !task.completed);
-  const completedTasks = tasks.filter(task => task.completed);
+  useEffect(() => {
+    axios
+    .get('https://sooknj4sac.execute-api.eu-west-2.amazonaws.com/dev/tasks')
+    .then (
+      response => {
+        setTasks(response.date.tasks);
+      }
+    )
+    .catch(
+      (error)=> {
+        console.log ('Error fetching data', error)
+      })
+    
+    .finally(() => console.log('Iam done!'))
+  }, []);
+
+  const activeTasks = tasks && tasks.filter(task => !task.completed);
+  const completedTasks = tasks && tasks.filter(task => task.completed);
 
   function deleteTask(id) {
 
